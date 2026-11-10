@@ -1,0 +1,93 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  company       String?
+  website       String?
+  budget        String
+  serviceNeeded String
+  message       String
+  status        String   @default("NEW")
+  sourceDomain  String   @default("digitizestudio.qd.je")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Campaign {
+  id          String   @id @default(cuid())
+  name        String
+  channel     String
+  budget      Float
+  spent       Float    @default(0)
+  impressions Int      @default(0)
+  clicks      Int      @default(0)
+  conversions Int      @default(0)
+  revenue     Float    @default(0)
+  roas        Float    @default(1.0)
+  cpa         Float    @default(0)
+  status      String   @default("ACTIVE")
+  health      Int      @default(95)
+  coreEngine  String   @default("CORE A-ON")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id           String   @id @default(cuid())
+  title        String
+  tagline      String
+  category     String
+  description  String
+  kpis         String
+  deliverables String
+  icon         String
+  status       String   @default("ACTIVE")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model CaseStudy {
+  id               String   @id @default(cuid())
+  title            String
+  client           String
+  industry         String
+  roas             String
+  conversionLift   String
+  revenueGenerated String
+  summary          String
+  metricsJson      String
+  tags             String
+  date             String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model WhatsAppContact {
+  id          String            @id @default(cuid())
+  phoneNumber String            @unique
+  name        String?
+  status      String            @default("ACTIVE")
+  tags        String?
+  messages    WhatsAppMessage[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model WhatsAppMessage {
+  id        String          @id @default(cuid())
+  contactId String
+  contact   WhatsAppContact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  direction String // INBOUND or OUTBOUND
+  content   String
+  status    String          @default("SENT")
+  timestamp DateTime        @default(now())
+}
