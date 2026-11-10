@@ -110,3 +110,4 @@ export const TelemetryBar: React.FC<TelemetryBarProps> = ({
     </div>
   );
 };
+

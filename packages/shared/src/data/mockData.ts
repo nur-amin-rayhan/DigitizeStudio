@@ -300,3 +300,4 @@ export const INITIAL_TELEMETRY: MarketingTelemetry = {
     { id: 'ev-5', time: '14:16:02', type: 'BUDGET_PACING', detail: 'TikTok viral boost activated for creative node #03', value: 'Active' }
   ]
 };
+

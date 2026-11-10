@@ -179,16 +179,25 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
         )}
         aria-label="Primary"
       >
-        {/* Logo row. On mobile we put a close button here; on desktop the
-            close button is hidden since the sidebar is always-visible. */}
-        <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+        {/* Logo row. DigitizeStudio Sci-Fi HUD branding */}
+        <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border/80 bg-background/50 px-4">
+          <Link href="/dashboard" className="flex items-center gap-2.5">
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary shadow-[0_0_12px_rgba(0,242,254,0.25)]">
               <MessageSquare className="h-4 w-4" />
+              <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
             </div>
-            <span className="text-sm font-semibold text-foreground">
-              CRM Template for WhatsApp
-            </span>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1 leading-none">
+                <span className="font-mono text-xs font-bold tracking-wider text-white">DIGITIZE</span>
+                <span className="font-mono text-xs font-bold tracking-wider text-primary">STUDIO</span>
+              </div>
+              <span className="mt-1 font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
+                WHATSAPP CRM /// v2.4
+              </span>
+            </div>
           </Link>
           <button
             type="button"
@@ -198,6 +207,52 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
           >
             <X className="h-5 w-5" />
           </button>
+        </div>
+
+        {/* Monorepo Quick App Switcher */}
+        <div className="border-b border-border/60 bg-muted/20 px-3 py-2 text-[10px] font-mono text-muted-foreground">
+          <div className="mb-1.5 flex items-center justify-between text-[9px] tracking-wider uppercase text-muted-foreground">
+            <span>ECOSYSTEM SUITE</span>
+            <span className="flex items-center gap-1 text-emerald-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              PORT 3103
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-1">
+            <a
+              href="http://localhost:3100"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between rounded border border-border/60 bg-card/60 px-2 py-1 text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <span>Portfolio</span>
+              <span className="text-[8px] text-muted-foreground">:3100</span>
+            </a>
+            <a
+              href="http://localhost:3101"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between rounded border border-border/60 bg-card/60 px-2 py-1 text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <span>CMS</span>
+              <span className="text-[8px] text-muted-foreground">:3101</span>
+            </a>
+            <a
+              href="http://localhost:3102"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-between rounded border border-border/60 bg-card/60 px-2 py-1 text-muted-foreground hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <span>Dashboard</span>
+              <span className="text-[8px] text-muted-foreground">:3102</span>
+            </a>
+            <div
+              className="flex items-center justify-between rounded border border-primary/40 bg-primary/10 px-2 py-1 text-primary font-semibold"
+            >
+              <span>WA CRM</span>
+              <span className="text-[8px] text-primary font-mono">LIVE</span>
+            </div>
+          </div>
         </div>
 
         {/* Main navigation */}

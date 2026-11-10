@@ -14,6 +14,7 @@
  */
 
 export const THEME_IDS = [
+  "cyber",
   "violet",
   "emerald",
   "cobalt",
@@ -23,7 +24,7 @@ export const THEME_IDS = [
 
 export type ThemeId = (typeof THEME_IDS)[number];
 
-export const DEFAULT_THEME: ThemeId = "violet";
+export const DEFAULT_THEME: ThemeId = "cyber";
 
 export const STORAGE_KEY = "wacrm.theme";
 
@@ -67,6 +68,12 @@ export interface ThemeMeta {
 }
 
 export const THEMES: ReadonlyArray<ThemeMeta> = [
+  {
+    id: "cyber",
+    name: "Cyber Cyan (HUD)",
+    tagline: "DigitizeStudio Holographic HUD with precision telemetry & cyan glow.",
+    swatch: "#00F2FE",
+  },
   {
     id: "violet",
     name: "Violet",

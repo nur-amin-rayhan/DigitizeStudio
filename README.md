@@ -145,3 +145,4 @@ Because this is a monorepo, each app can be deployed independently on Vercel:
 
 © 2026 **DigitizeStudio** (`digitizestudio.qd.je`). All rights reserved.
 Precision Digital Growth Powered by Algorithmic Telemetry.
+

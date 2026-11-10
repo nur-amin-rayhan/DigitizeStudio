@@ -99,3 +99,4 @@ export const DataStore = {
     return safeGetItem<MarketingTelemetry>(STORAGE_KEYS.TELEMETRY, INITIAL_TELEMETRY);
   }
 };
+

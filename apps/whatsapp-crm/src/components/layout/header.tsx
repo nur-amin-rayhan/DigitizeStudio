@@ -65,9 +65,24 @@ export function Header({ onOpenSidebar }: HeaderProps) {
         >
           <Menu className="h-5 w-5" />
         </button>
-        <h1 className="truncate text-base font-semibold text-foreground sm:text-lg">
-          {title}
-        </h1>
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(0,242,254,0.8)]" />
+          <h1 className="truncate text-base font-semibold text-foreground sm:text-lg">
+            {title}
+          </h1>
+        </div>
+      </div>
+
+      {/* Cyber HUD telemetry strip */}
+      <div className="hidden md:flex items-center gap-3 font-mono text-[10px] text-muted-foreground border border-border/60 bg-muted/20 px-3 py-1 rounded-full">
+        <span className="flex items-center gap-1.5 text-emerald-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          ONLINE
+        </span>
+        <span className="text-border">|</span>
+        <span className="text-cyan-400">digitizestudio.qd.je</span>
+        <span className="text-border">|</span>
+        <span className="text-muted-foreground">LATENCY: 14ms</span>
       </div>
 
       <div className="flex items-center gap-1 sm:gap-2">

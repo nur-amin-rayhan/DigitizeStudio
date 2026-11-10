@@ -183,3 +183,4 @@ export const CircularGauge: React.FC<CircularGaugeProps> = ({
     </div>
   );
 };
+

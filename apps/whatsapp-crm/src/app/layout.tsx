@@ -20,10 +20,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "wacrm",
-    template: "%s — wacrm",
+    default: "DigitizeStudio WhatsApp CRM",
+    template: "%s — DigitizeStudio WA CRM",
   },
-  description: "Self-hostable CRM template for WhatsApp.",
+  description: "Futuristic Cyber-HUD WhatsApp CRM node for digitizestudio.qd.je",
   robots: {
     index: false,
     follow: false,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#080C10",
   colorScheme: "dark light",
 };
 
