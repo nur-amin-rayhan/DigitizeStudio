@@ -41,62 +41,62 @@ test.describe('DigitizeStudio Monorepo E2E Test Suite (All 4 Apps)', () => {
     await expect(page.locator('text=TELEMETRY INTAKE CONFIRMED')).toBeVisible({ timeout: 6000 });
   });
 
-  // 2. CMS CONTENT MANAGEMENT STUDIO (:3101)
-  test('App 2 - CMS (Content & Lead Studio) Operates Smoothly', async ({ page }) => {
+  // 2. CMS CONTENT MANAGEMENT STUDIO (:3101) - PROTECTED WITH SUPABASE AUTH
+  test('App 2 - CMS (Content & Lead Studio) Auth Gate & Supabase Login', async ({ page }) => {
     await page.goto('http://localhost:3101');
+    
+    // Verify unauthenticated access redirects to /login
+    await expect(page).toHaveURL('http://localhost:3101/login');
     await expect(page).toHaveTitle(/CMS/);
-    await expect(page.locator('h1')).toContainText('DIGITIZESTUDIO COMMAND');
+    await expect(page.locator('h1')).toContainText('CMS STUDIO ACCESS GATEWAY');
 
-    // Verify Ingested Leads Table
-    await expect(page.locator('text=INCOMING LEADS & CONSULTATION TELEMETRY')).toBeVisible();
-    const table = page.locator('table');
-    await expect(table).toBeVisible();
+    // Verify ID (Email) & Passkey fields
+    const emailInput = page.locator('input[type="email"]');
+    const passInput = page.locator('input[type="password"]');
+    await expect(emailInput).toBeVisible();
+    await expect(passInput).toBeVisible();
 
-    // Navigate to Campaigns Manager
-    await page.click('a:has-text("CAMPAIGN MANAGER")');
-    await expect(page).toHaveURL('http://localhost:3101/campaigns');
-    await expect(page.locator('h1')).toContainText('MARKETING CAMPAIGN ENGINES');
-    await expect(page.locator('text=ALPHA /// Google Search Core Pacing')).toBeVisible();
+    // Verify Mode Switcher
+    await expect(page.locator('text=OPERATOR SIGN IN')).toBeVisible();
+    await page.click('button:has-text("PROVISION ACCOUNT")');
+    await expect(page.locator('h1')).toContainText('PROVISION OPERATOR NODE');
+    await page.click('button:has-text("OPERATOR SIGN IN")');
 
-    // Navigate to Site Settings & Check Domain
-    await page.click('a:has-text("SITE SETTINGS")');
-    await expect(page).toHaveURL('http://localhost:3101/settings');
-    await expect(page.locator('input[value*="digitizestudio.qd.je"]')).toBeVisible();
+    // Verify Supabase Cloud telemetry badge
+    await expect(page.locator('text=digitizestudio.qd.je').first()).toBeVisible();
   });
 
-  // 3. GROWTH TELEMETRY DASHBOARD (:3102)
-  test('App 3 - Dashboard (Growth Telemetry) Displays Live Metrics', async ({ page }) => {
+  // 3. GROWTH TELEMETRY DASHBOARD (:3102) - PROTECTED WITH SUPABASE AUTH
+  test('App 3 - Dashboard (Growth Telemetry) Auth Gate & Supabase Login', async ({ page }) => {
     await page.goto('http://localhost:3102');
+    
+    // Verify unauthenticated access redirects to /login
+    await expect(page).toHaveURL('http://localhost:3102/login');
     await expect(page).toHaveTitle(/Growth & Telemetry Dashboard/);
-    await expect(page.locator('h1')).toContainText('CAMPAIGN TELEMETRY & ROAS RADAR');
+    await expect(page.locator('h1')).toContainText('GROWTH RADAR ACCESS');
 
-    // Verify Key Telemetry Metric Cards
-    await expect(page.locator('text=BLENDED ROAS MULTIPLIER')).toBeVisible();
-    await expect(page.locator('text=CLIENT REVENUE GENERATED')).toBeVisible();
-    await expect(page.locator('text=REAL-TIME CONVERSION EVENT FEED')).toBeVisible();
+    // Verify ID (Email) & Passkey fields
+    const emailInput = page.locator('input[type="email"]');
+    const passInput = page.locator('input[type="password"]');
+    await expect(emailInput).toBeVisible();
+    await expect(passInput).toBeVisible();
 
-    // Navigate to Funnel Analytics
-    await page.click('a:has-text("FUNNEL ANALYTICS")');
-    await expect(page).toHaveURL('http://localhost:3102/analytics');
-    await expect(page.locator('h1')).toContainText('FUNNEL TELEMETRY & ATTRIBUTION MATRIX');
-
-    // Navigate to Executive Audit Report
-    await page.click('a:has-text("EXECUTIVE AUDIT")');
-    await expect(page).toHaveURL('http://localhost:3102/reports');
-    await expect(page.locator('h1')).toContainText('PERFORMANCE & ROAS AUDIT REPORT');
-    await expect(page.locator('text=DIGITIZESTUDIO EXECUTIVE MARKETING BRIEF')).toBeVisible();
+    // Verify Submit button
+    await expect(page.locator('button[type="submit"]')).toBeVisible();
+    await expect(page.locator('text=digitizestudio.qd.je').first()).toBeVisible();
   });
 
-  // 4. WHATSAPP CRM ROUTE CHECK (:3103)
-  test('App 4 - WhatsApp CRM Route Check & Integration', async ({ page }) => {
+  // 4. WHATSAPP CRM ROUTE CHECK (:3103) - PROTECTED WITH SUPABASE AUTH
+  test('App 4 - WhatsApp CRM Route Check & Supabase Auth Integration', async ({ page }) => {
     await page.goto('http://localhost:3103');
 
-    // Check redirection or auth page
+    // Check redirection to auth login page
     await expect(page).toHaveURL(/localhost:3103\/(login|dashboard)/);
 
-    // Verify DigitizeStudio Monorepo Integration Header
+    // Verify DigitizeStudio Monorepo Integration Header & Login form
     await expect(page.locator('text=DIGITIZESTUDIO /// WHATSAPP CRM NODE')).toBeVisible();
     await expect(page.locator('text=digitizestudio.qd.je').first()).toBeVisible();
+    await expect(page.locator('input[type="email"]')).toBeVisible();
   });
 
 });
